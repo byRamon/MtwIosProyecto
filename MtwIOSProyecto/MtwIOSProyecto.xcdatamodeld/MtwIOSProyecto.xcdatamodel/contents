@@ -1,30 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Pedido" representedClassName="Pedido" syncable="YES" codeGenerationType="class">
+    <entity name="Pedido" representedClassName="Pedido" syncable="YES">
         <attribute name="descripcion" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="total" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="productos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Productos"/>
+        <relationship name="productos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Producto" inverseName="pedidos" inverseEntity="Producto"/>
         <relationship name="usuario" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Usuario" inverseName="pedidos" inverseEntity="Usuario"/>
     </entity>
-    <entity name="Productos" representedClassName="Productos" syncable="YES" codeGenerationType="class">
+    <entity name="Producto" representedClassName="Producto" syncable="YES">
         <attribute name="costo" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="descripcion" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="imagen" optional="YES" attributeType="URI"/>
         <attribute name="nombre" optional="YES" attributeType="String"/>
-        <relationship name="pedidos" optional="YES" maxCount="1" deletionRule="Nullify"/>
+        <relationship name="pedidos" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pedido" inverseName="productos" inverseEntity="Pedido"/>
     </entity>
-    <entity name="Usuario" representedClassName="Usuario" syncable="YES" codeGenerationType="class">
+    <entity name="Usuario" representedClassName="Usuario" syncable="YES">
         <attribute name="direccion" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="nombre" optional="YES" attributeType="String"/>
         <attribute name="telefono" optional="YES" attributeType="String"/>
         <relationship name="pedidos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Pedido" inverseName="usuario" inverseEntity="Pedido"/>
     </entity>
     <elements>
-        <element name="Usuario" positionX="-63" positionY="-18" width="128" height="118"/>
-        <element name="Pedido" positionX="-54" positionY="18" width="128" height="118"/>
-        <element name="Productos" positionX="-36" positionY="27" width="128" height="133"/>
+        <element name="Pedido" positionX="-54" positionY="18" width="128" height="103"/>
+        <element name="Producto" positionX="-36" positionY="27" width="128" height="118"/>
+        <element name="Usuario" positionX="-63" positionY="-18" width="128" height="103"/>
     </elements>
 </model>
