@@ -14,4 +14,8 @@ struct ResultTiendas: Codable{
     var telefono: String
     var ubicacion: String
     var imagen: String
+    
+    #if DEBUG
+    static let example = ResultTiendas(id: UUID(), nombre: "tienda", descripcion: "tienda de prueba",  telefono:"1234567890", ubicacion: "ubicacion ejemplo", imagen: "https://www.indiaspora.org/wp-content/uploads/2018/10/image-not-available-240x240.jpg")
+    #endif
 }
