@@ -19,6 +19,9 @@ class Orden: ObservableObject {
         return 0.0
     }
     func add(producto: ResultProductos){
+        if productos.count > 0 && productos[0].idtienda != producto.idtienda{
+            productos = []
+        }
         productos.append(producto)
     }
     func remove(producto:ResultProductos){
@@ -26,10 +29,23 @@ class Orden: ObservableObject {
             productos.remove(at: index)
         }
     }
+    func exist(producto: ResultProductos) -> Bool {
+        print("Existen \(productos.count) elementos")
+        if productos.count == 0 { return false }
+        if let index = productos.firstIndex(of: producto){
+            //print("si existe tiene el indice \(index)")
+            return index >= 0
+        }
+        return false
+    }
+    func cambioTienda(idTienda: UUID) -> Bool {
+        return productos.count > 0 && productos[0].idtienda != idTienda
+    }
 }
 
 struct ResultProductos: Codable, Equatable{
     var id: UUID
+    var idtienda: UUID
     var nombre: String
     var descripcion: String
     var thumbnail: String
@@ -40,6 +56,6 @@ struct ResultProductos: Codable, Equatable{
         return cost ?? 0.0
     }
     #if DEBUG
-    static let example = ResultProductos(id: UUID(), nombre: "producto", descripcion: "producto de prueba",  thumbnail: "https://www.indiaspora.org/wp-content/uploads/2018/10/image-not-available-240x240.jpg", costo: "")
+    static let example = ResultProductos(id: UUID(), idtienda: UUID(), nombre: "producto", descripcion: "producto de prueba",  thumbnail: "https://www.indiaspora.org/wp-content/uploads/2018/10/image-not-available-240x240.jpg", costo: "")
     #endif
 }

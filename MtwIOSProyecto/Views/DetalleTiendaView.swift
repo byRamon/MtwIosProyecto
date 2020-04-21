@@ -10,6 +10,7 @@ import SwiftUI
 
 struct DetalleTiendaView: View {
     var tienda: ResultTiendas
+    @EnvironmentObject var orden: Orden
     @State private var resultProductos = [ResultProductos]()
     var body: some View {
         VStack{
@@ -54,7 +55,10 @@ struct DetalleTiendaView: View {
 }
 
 struct DetalleTiendaView_Previews: PreviewProvider {
+    static let orden = Orden()
     static var previews: some View {
-        DetalleTiendaView(tienda: ResultTiendas.example)
+        NavigationView{
+            DetalleTiendaView(tienda: ResultTiendas.example).environmentObject(orden)
+        }
     }
 }

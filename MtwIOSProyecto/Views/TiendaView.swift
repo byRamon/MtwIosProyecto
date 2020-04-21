@@ -18,7 +18,6 @@ struct TiendaView: View {
                     Section(header: Text(tienda.nombre).font(.headline)){
                         Text("Telefono: \(tienda.telefono)").font(.caption)
                         Text("Ubicacion: \(tienda.ubicacion)".lowercased()).font(.caption)
-                    //Text("\(tienda.descripcion)")
                     }
                 }
             }

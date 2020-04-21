@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct ProductoView: View {
+    @EnvironmentObject var orden: Orden
     var producto : ResultProductos
     var body: some View {
         HStack{
@@ -19,7 +20,25 @@ struct ProductoView: View {
                     Spacer()
                     Text("$\(producto.dbCosto(), specifier: "%.2f")")
                 }
-                Text(producto.descripcion).font(.caption)
+                HStack{
+                    Text(producto.descripcion).font(.caption)
+                    Spacer()
+                    Button(action: {
+                        if self.orden.exist(producto: self.producto) {
+                            self.orden.remove(producto: self.producto)
+                        }
+                        else{
+                            self.orden.add(producto: self.producto)
+                        }
+                    }) {
+                        if self.orden.exist(producto: self.producto) {
+                            Image(systemName: "cart.badge.minus").foregroundColor(.green)
+                        }
+                        else{
+                            Image(systemName: "cart.badge.plus").foregroundColor(.gray)
+                        }
+                    }
+                }
             }
         }
     }

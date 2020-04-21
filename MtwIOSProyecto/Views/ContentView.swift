@@ -38,7 +38,7 @@ struct ContentView: View {
                 if let decodedResponse = try? JSONDecoder().decode([ResultTiendas].self, from: data) {
                     DispatchQueue.main.async {
                         self.resultsTiendas = decodedResponse
-                        print("RespuestaResponse : .\(decodedResponse)")
+                        //print("RespuestaResponse : .\(decodedResponse)")
                     }
                     return
                 }

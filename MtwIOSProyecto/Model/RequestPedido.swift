@@ -9,11 +9,6 @@
 import Foundation
 
 struct RequestPedido: Codable{
-    var nombre: String = ""
-    var direccion: String = ""
-    //var productos: [RequestProductos]
-}
-struct RequestProductos: Codable {
     var id:String = ""
 }
 

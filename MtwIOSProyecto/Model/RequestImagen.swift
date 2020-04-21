@@ -17,7 +17,7 @@ class RequestImagen: ObservableObject {
     init(url: String?) {
         self.urlImagen = url
         if cargarImagenCache(){
-            print("Imagen del cache")
+            //print("Imagen del cache")
             return
         }
         //print("imagen de internet")
