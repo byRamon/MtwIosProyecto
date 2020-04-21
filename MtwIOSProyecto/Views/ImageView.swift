@@ -29,7 +29,7 @@ struct ImageView: View {
      static var defaultImage = UIImage(named: "defaultImage")
      var body: some View {
          Image(uiImage: requestImagen.imagen ?? ImageView.defaultImage!)
-             .resizable().scaledToFit().frame(width:300, height: 300)
+             .resizable().scaledToFit()//.frame(width:300, height: 300)
      }
  }
 

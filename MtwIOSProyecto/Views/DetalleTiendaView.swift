@@ -13,18 +13,19 @@ struct DetalleTiendaView: View {
     @State private var resultProductos = [ResultProductos]()
     var body: some View {
         VStack{
-            ImageDetailView(url: tienda.imagen).padding()
-            Text("Tel: \(tienda.telefono)")
-            Text("Dir: \(tienda.ubicacion.lowercased())")
-            Text("\(tienda.descripcion)")
+            ImageDetailView(url: tienda.imagen)
+            VStack{
+                Text("Tel: \(tienda.telefono)")
+                Text("Dir: \(tienda.ubicacion.lowercased())")
+                Text("\(tienda.descripcion)")
+            }
             List{
                 ForEach(resultProductos, id: \.id){ producto in
                     VStack(alignment: .leading){
-                        Text("\(producto.nombre) precio: $\(producto.dbCosto(), specifier: "%.2f")")
+                        ProductoView(producto: producto)
                     }
                 }
-            }.onAppear(perform: loadData).padding()
-            
+            }.onAppear(perform: loadData)
         }.navigationBarTitle(Text(tienda.nombre), displayMode: .inline)
     }
     

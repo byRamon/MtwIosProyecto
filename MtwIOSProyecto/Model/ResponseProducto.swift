@@ -8,8 +8,8 @@
 
 import Foundation
 
-class Orden {
-    var productos = [ResultProductos]()
+class Orden: ObservableObject {
+    @Published var productos = [ResultProductos]()
     var total: Double {
         if productos.count > 0{
             return productos.reduce(0){

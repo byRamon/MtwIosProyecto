@@ -16,8 +16,8 @@ struct TiendaView: View {
                 ImageView(url: tienda.imagen)
                 VStack(alignment: .leading){
                     Section(header: Text(tienda.nombre).font(.headline)){
-                    Text("Telefono: \(tienda.telefono)")
-                        Text("Ubicacion: \(tienda.ubicacion)".lowercased())
+                        Text("Telefono: \(tienda.telefono)").font(.caption)
+                        Text("Ubicacion: \(tienda.ubicacion)".lowercased()).font(.caption)
                     //Text("\(tienda.descripcion)")
                     }
                 }
