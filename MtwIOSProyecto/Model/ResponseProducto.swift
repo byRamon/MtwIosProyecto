@@ -12,7 +12,9 @@ class Orden {
     var productos = [ResultProductos]()
     var total: Double {
         if productos.count > 0{
-            return productos.reduce(0){$0 + $1.costo}
+            return productos.reduce(0){
+                $0 + $1.dbCosto()
+            }
         }
         return 0.0
     }
@@ -30,10 +32,14 @@ struct ResultProductos: Codable, Equatable{
     var id: UUID
     var nombre: String
     var descripcion: String
-    var imagen: String
-    var costo: Double
+    var thumbnail: String
+    var costo: String
     
+    func dbCosto()->Double{
+        let cost = Double(costo)
+        return cost ?? 0.0
+    }
     #if DEBUG
-    static let example = ResultProductos(id: UUID(), nombre: "producto", descripcion: "producto de prueba",  imagen: "https://www.indiaspora.org/wp-content/uploads/2018/10/image-not-available-240x240.jpg", costo: 0)
+    static let example = ResultProductos(id: UUID(), nombre: "producto", descripcion: "producto de prueba",  thumbnail: "https://www.indiaspora.org/wp-content/uploads/2018/10/image-not-available-240x240.jpg", costo: "")
     #endif
 }

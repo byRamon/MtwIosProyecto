@@ -11,7 +11,7 @@ import SwiftUI
 struct TiendaView: View {
     var tienda : ResultTiendas
     var body: some View {
-            NavigationLink(destination: Text(tienda.nombre)){
+        NavigationLink(destination: DetalleTiendaView(tienda: tienda)){
             HStack{
                 ImageView(url: tienda.imagen)
                 VStack(alignment: .leading){
