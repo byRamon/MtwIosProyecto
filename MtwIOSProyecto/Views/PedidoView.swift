@@ -9,7 +9,11 @@
 import SwiftUI
 
 struct PedidoView: View {
+    @FetchRequest(entity: Usuario.entity(), sortDescriptors: []) var usuarios: FetchedResults<Usuario>
+    @Environment(\.managedObjectContext) var context
     @EnvironmentObject var orden: Orden
+    @State private var showingAlert = false
+    @State private var mensaje = ""
     @State private var nombre = ""
     @State private var direccion = ""
     @State private var telefono = ""
@@ -40,7 +44,13 @@ struct PedidoView: View {
                 Section {
                     Button(action: {
                         if self.orden.productos.count > 0{
-                            self.hacerPedido()
+                            if !self.$nombre.wrappedValue.isEmpty && !self.$direccion.wrappedValue.isEmpty && !self.$telefono.wrappedValue.isEmpty{
+                                self.hacerPedido()
+                            }
+                            else {
+                                self.mensaje = "Favor de ingresar los datos de contacto"
+                                self.showingAlert.toggle()
+                            }
                         }
                         //else{MainView()}
                     }) {
@@ -53,6 +63,9 @@ struct PedidoView: View {
                         }
                         //else{Text("Añadir productos")}
                     }
+                }
+                .alert(isPresented: $showingAlert) {
+                    Alert(title: Text("Proyecto IOS"), message: Text(self.mensaje), dismissButton: .default(Text("Aceptar")))
                 }
             }.navigationBarTitle("Orden").listStyle(GroupedListStyle())
         }
@@ -78,20 +91,62 @@ struct PedidoView: View {
         request.httpBody = "pedido=\(jsonData)".data(using: String.Encoding.utf8)
         let session = URLSession.shared
         session.dataTask(with: request){ data, response, error in
-            if let response = response{
-                print(response)
+            if error != nil{
+                self.mensaje = "Error al realizar el pedido"
+                self.showingAlert.toggle()
+                return
             }
             if let data = data{
-                print("Datos \(data)")
-                if let returnData = String(data: data, encoding: .utf8) {
-                    print("Respuesta post: .\(returnData)")
+                if let idPedido = String(data: data, encoding: .utf8) {
+                    var uuid = UUID(uuidString: idPedido)
+                    //print(uuid)
+                    if uuid == nil{
+                        self.mensaje = "Error al realizar el pedido"
+                        self.showingAlert.toggle()
+                        return
+                    }
+                    self.savePedido(idPedido: idPedido)
+                    self.mensaje = "Pedido realizado"
+                    self.showingAlert.toggle()
+                    self.orden.productos = []
                     return
                 }
-                else {
-                    print("")
-                }
             }
-            }.resume()
+        }.resume()
+    }
+    func savePedido(idPedido: String){
+        /*self.usuarios.forEach { usuario in
+            self.context.delete(usuario)
+        }*/
+        print("Pedido creado: \(idPedido)")
+        var pedido: Pedido?
+        var usuario: Usuario?
+        orden.productos.forEach { pr in
+            let producto = Producto(context: self.context)
+            producto.nombre = pr.nombre
+            producto.costo = pr.dbCosto()
+            producto.descripcion = pr.descripcion
+            if pedido != nil{
+                producto.pedidos = pedido
+            }
+            else{
+                pedido = Pedido(context: self.context)
+                pedido?.descripcion = "Pedido: \(idPedido)"
+                pedido?.total = orden.total
+                producto.pedidos = pedido
+            }
+            if(usuario != nil){
+                producto.pedidos?.usuario = usuario
+            }
+            else {
+                usuario = Usuario(context: context)
+                usuario?.nombre = self.$nombre.wrappedValue
+                usuario?.direccion = self.$direccion.wrappedValue
+                producto.pedidos?.usuario = usuario
+            }
+            try? self.context.save()
+        }
+        print("context guardado")
     }
 }
 

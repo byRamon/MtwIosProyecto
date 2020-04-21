@@ -10,8 +10,8 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var resultsTiendas = [ResultTiendas]()
-    @Environment(\.managedObjectContext) var context
-    @FetchRequest(entity: Usuario.entity(), sortDescriptors: []) var usuarios: FetchedResults<Usuario>
+    @State private var showingAlert = false
+    @State private var mensaje = ""
     var body: some View {
         NavigationView{
             List{
@@ -20,7 +20,9 @@ struct ContentView: View {
                         TiendaView(tienda: tienda)
                     }
                 }
-            }.onAppear(perform: loadData)
+            }.onAppear(perform: loadData).alert(isPresented: $showingAlert) {
+            Alert(title: Text("Proyecto IOS"), message: Text(self.mensaje), dismissButton: .default(Text("Aceptar")))
+            }
             .navigationBarTitle("Tiendas")
         }
     }
@@ -43,6 +45,8 @@ struct ContentView: View {
                     return
                 }
                 print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+                self.mensaje = "Error de conexión"
+                self.showingAlert.toggle()
             }
         }.resume()
     }

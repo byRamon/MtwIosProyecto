@@ -12,6 +12,8 @@ struct DetalleTiendaView: View {
     var tienda: ResultTiendas
     @EnvironmentObject var orden: Orden
     @State private var resultProductos = [ResultProductos]()
+    @State private var showingAlert = false
+    @State private var mensaje = ""
     var body: some View {
         VStack{
             ImageDetailView(url: tienda.imagen)
@@ -26,7 +28,9 @@ struct DetalleTiendaView: View {
                         ProductoView(producto: producto)
                     }
                 }
-            }.onAppear(perform: loadData)
+            }.onAppear(perform: loadData).alert(isPresented: $showingAlert) {
+            Alert(title: Text("Proyecto IOS"), message: Text(self.mensaje), dismissButton: .default(Text("Aceptar")))
+            }
         }.navigationBarTitle(Text(tienda.nombre), displayMode: .inline)
     }
     
@@ -36,20 +40,23 @@ struct DetalleTiendaView: View {
             print("invalid Url")
             return
         }
-        print(url)
+        //print(url)
         let request = URLRequest(url: url)
         URLSession.shared.dataTask(with: request){ data, response, error in
             if let data = data{
                 do{
-                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    print(json)
+                    //let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    //print(json)
                     let productos = try JSONDecoder().decode([ResultProductos].self, from: data)
-                    print(productos)
+                    //print(productos)
                     self.resultProductos = productos
+                    return
                 }catch{
                     print(error)
                 }
             }
+            self.mensaje = "Error de conexión"
+            self.showingAlert.toggle()
         }.resume()
     }
 }

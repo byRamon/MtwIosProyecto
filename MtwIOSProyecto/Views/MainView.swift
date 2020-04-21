@@ -18,6 +18,10 @@ struct MainView: View {
             }
             PedidoView().tabItem{
                 Image(systemName: orden.productos.count > 0 ? "cart.fill" : "cart")
+                Text("Ordenar")
+            }
+            PedidosView().tabItem{
+                Image(systemName: orden.productos.count > 0 ? "cart.fill" : "cart")
                 Text("Pedidos")
             }
         }

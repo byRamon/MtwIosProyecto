@@ -30,7 +30,7 @@ class Orden: ObservableObject {
         }
     }
     func exist(producto: ResultProductos) -> Bool {
-        print("Existen \(productos.count) elementos")
+        //print("Existen \(productos.count) elementos")
         if productos.count == 0 { return false }
         if let index = productos.firstIndex(of: producto){
             //print("si existe tiene el indice \(index)")
