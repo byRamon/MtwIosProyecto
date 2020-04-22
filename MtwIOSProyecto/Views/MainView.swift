@@ -21,7 +21,7 @@ struct MainView: View {
                 Text("Ordenar")
             }
             PedidosView().tabItem{
-                Image(systemName: orden.productos.count > 0 ? "cart.fill" : "cart")
+                Image(systemName: "archivebox.fill")
                 Text("Pedidos")
             }
         }

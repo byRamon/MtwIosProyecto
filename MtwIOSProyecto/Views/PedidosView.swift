@@ -10,6 +10,7 @@ import SwiftUI
 
 struct PedidosView: View {
     @FetchRequest(entity: Usuario.entity(), sortDescriptors: []) var usuarios: FetchedResults<Usuario>
+    @Environment(\.managedObjectContext) var context
     var body: some View {
         VStack {
             List {
@@ -17,28 +18,28 @@ struct PedidosView: View {
                     Section(header: Text(usuario.wNombre)) {
                         ForEach(usuario.arrayPedidos, id: \.self) { pedido in
                             VStack{
-                                Text(pedido.wDescription)
+                                HStack{
+                                    Text(pedido.wDescription)
+                                    Spacer()
+                                    Text("$\(pedido.total, specifier: "%.2f")")
+                                }
                                 ForEach(pedido.arrayProductos, id: \.self) { producto in
-                                    Text(producto.wNombre)
+                                    HStack{
+                                        Text(producto.wNombre)
+                                        Spacer()
+                                    }
                                 }
                             }
                         }
                     }
+                }.onDelete{ index in
+                    self.context.delete(self.usuarios[index.first!])
+                    try? self.context.save()
                 }
             }.onAppear(perform: loadData)
         }
     }
-    
     func loadData() {
-        self.usuarios.forEach { usuario in
-            print(usuario)
-            usuario.arrayPedidos.forEach { pedido in
-                print(pedido)
-                pedido.arrayProductos.forEach { producto in
-                    print(producto.wNombre)
-                }
-            }
-        }
     }
 }
 
