@@ -26,4 +26,8 @@ extension Producto {
     public var wNombre: String{
         nombre ?? ""
     }
+    public var wImagen: String{
+        imagen?.absoluteString ?? ""
+    }
+    
 }

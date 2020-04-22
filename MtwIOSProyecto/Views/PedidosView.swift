@@ -25,6 +25,7 @@ struct PedidosView: View {
                                 }
                                 ForEach(pedido.arrayProductos, id: \.self) { producto in
                                     HStack{
+                                        ImageDBView(url: producto.wImagen).overlay(Rectangle().stroke(Color.gray, lineWidth: 1))
                                         Text(producto.wNombre)
                                         Spacer()
                                     }

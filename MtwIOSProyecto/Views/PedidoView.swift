@@ -126,7 +126,7 @@ struct PedidoView: View {
             producto.nombre = pr.nombre
             producto.costo = pr.dbCosto()
             producto.descripcion = pr.descripcion
-            //producto.imagen = pr.thumbnail
+            producto.imagen = URL(string: pr.thumbnail)
             if pedido != nil{
                 producto.pedidos = pedido
             }
