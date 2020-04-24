@@ -56,7 +56,7 @@
 		D99AD4CB244F308E003F2FA1 /* PedidoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedidoView.swift; sourceTree = "<group>"; };
 		D99AD4CD244F34E9003F2FA1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D99AD4CF244F8FD5003F2FA1 /* PedidosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedidosView.swift; sourceTree = "<group>"; };
-		D9F8743C244A5C370080117C /* MtwIOSProyecto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MtwIOSProyecto.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9F8743C244A5C370080117C /* iTienda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTienda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9F8743F244A5C370080117C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9F87441244A5C370080117C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D9F87444244A5C370080117C /* MtwIOSProyecto.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MtwIOSProyecto.xcdatamodel; sourceTree = "<group>"; };
@@ -136,7 +136,7 @@
 		D9F8743D244A5C370080117C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D9F8743C244A5C370080117C /* MtwIOSProyecto.app */,
+				D9F8743C244A5C370080117C /* iTienda.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -184,7 +184,7 @@
 			);
 			name = MtwIOSProyecto;
 			productName = MtwIOSProyecto;
-			productReference = D9F8743C244A5C370080117C /* MtwIOSProyecto.app */;
+			productReference = D9F8743C244A5C370080117C /* iTienda.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -406,7 +406,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = mx.edu.delasalle.MtwIOSProyecto;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = iTienda;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -426,7 +426,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = mx.edu.delasalle.MtwIOSProyecto;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = iTienda;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

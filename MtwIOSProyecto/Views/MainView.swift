@@ -24,7 +24,7 @@ struct MainView: View {
                 Image(systemName: "archivebox.fill")
                 Text("Pedidos")
             }
-        }
+        }//.background(Color.gray)//.preferredColorScheme(.dark)
     }
 }
 

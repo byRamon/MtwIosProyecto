@@ -59,7 +59,7 @@ struct PedidoView: View {
                                 Text("Completar pedido")
                                 Spacer()
                                 Image(systemName: "paperplane")
-                            }.padding().background(Color.green).edgesIgnoringSafeArea(.all)
+                            }.padding().background(Color.orange).edgesIgnoringSafeArea(.all)
                         }
                         //else{Text("Añadir productos")}
                     }
